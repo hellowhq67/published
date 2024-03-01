@@ -1,0 +1,73 @@
+.section {
+  margin: 2rem 0px;
+}
+.heading {
+  margin: 20px 0px;
+  margin-left: 12rem;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+.Card {
+  width: 40rem;
+  background: whitesmoke;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.316);
+  transition: 0.3s ease;
+}
+.Card:hover {
+  transform: translateY(-5px);
+}
+.Card:hover .desc button {
+  background: blue;
+  color: white;
+  border: none;
+}
+.imgaeCol {
+  position: relative;
+  width: 100%;
+}
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffff;
+  font-size: 2rem;
+}
+.imgaeCol img {
+  width: 100%;
+  object-fit: contain;
+}
+.desc {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+}
+.desc button {
+  padding: 14px 25px;
+}
+
+@media (max-width: 750px) {
+  .section {
+    margin: 2rem 0px;
+    width: 100%;
+  }
+  .Card {
+    width: 20rem;
+    background: whitesmoke;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.316);
+    transition: 0.3s ease;
+  }
+  .heading {
+    margin: 20px 0px;
+    font-size: 20px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "font-end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.10",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.16",
+    "@uploadthing/react": "^6.2.4",
+    "axios": "^1.6.7",
+    "firebase": "^10.8.0",
+    "mongoose": "^7.3.3",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-toastify": "^10.0.4",
+    "styled-components": "^6.1.8",
+    "swiper": "^11.0.6",
+    "uploadthing": "^6.4.1"
+  }
+}

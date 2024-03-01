@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem 0px;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 40rem;
+}
+.col input {
+  padding: 20px 30px;
+  width: 100%;
+  margin: 20px 0px;
+}
+.col select {
+  padding: 20px 30px;
+  width: 100%;
+  margin:20px 0px;
+}
+.wrapper button{
+    background: black;
+    color: whitesmoke;
+    font-size: 20px;
+    padding: 10px 20px;
+}
+
+@media (max-width:750px) {
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100vw;
+    padding: 2rem;
+  }
+}

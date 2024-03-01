@@ -1,0 +1,74 @@
+.prfileRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.profileCol {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+.proImgae {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.profileWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 8rem;
+}
+.profileInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.edits {
+  padding: 10px 19px;
+  border: 1px solid rgba(128, 128, 128, 0.603);
+}
+.buttonCol {
+  display: flex;
+  gap: 10px;
+}
+
+.profileWrapper2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 9rem;
+}
+.selectFliter {
+  padding: 10px 20px;
+  margin: 0px 4px;
+  font-weight: bold;
+}
+.divder {
+  width: 80%;
+  margin: auto;
+  height: 1px;
+  background: gray;
+}
+.tab {
+  display: flex;
+  flex-direction: column;
+}
+.tabButton{
+    width: 100%;
+    padding: 1rem 10rem;
+    display: flex;
+    gap: 40px;
+}
+.tabButton span{
+    cursor: pointer;
+}
+.listings{
+    cursor: pointer;
+    border-bottom: 1px solid black;
+
+}
+.feedbacK{
+    border-bottom: 1px solid black;
+}

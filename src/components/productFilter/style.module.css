@@ -1,0 +1,54 @@
+.wrapper{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.productFilter {
+    width: 15vw;
+    overflow: scroll;
+    height: 100vh;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    margin-right: 20px;
+  }
+  .productFilter::-webkit-scrollbar {
+    display: none;
+  }
+  .checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .checkbox input {
+    margin: 10px 0px;
+  }
+  .sizeBox {
+    width: 100%;
+    background: whitesmoke;
+    color: rgba(128, 128, 128, 0.65);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .sizeBox {
+    font-size: 12px;
+  }
+  .sizeBox .btn {
+    background: rgb(255, 255, 255);
+    padding: 10px 25px;
+    border-radius: 3px;
+    margin-top: 4px;
+    font-weight: bold;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+  }
+  .selectFliter {
+    padding: 10px 20px;
+    margin: 0px 4px;
+    font-weight: bold;
+  }
+  @media (max-width:750px) {
+    
+  }

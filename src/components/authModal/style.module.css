@@ -1,0 +1,43 @@
+.btnCol {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.btnCol button {
+  width: 100%;
+  padding: 14px 36px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 10px 0px;
+  font-size: 17px;
+  font-weight: 500;
+  
+}
+.btn{
+    color: white;
+    background: black;
+    border: none;
+    cursor: pointer;
+}
+
+.btn1{
+    color: white;
+    background: rgb(42, 76, 162);
+    border: none;
+    cursor: pointer;
+}
+.btn2{
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+.btn4{
+  color: white;
+  background: black;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
