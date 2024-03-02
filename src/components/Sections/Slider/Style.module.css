@@ -36,29 +36,36 @@
     height: 100%;
 
 }
-.priceCol{
+.priceCol {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     margin: 4px 0px;
-}
-.btn{
+  }
+  .btn {
     background: transparent;
     border: none;
-}
-.title{
+  }
+  .title {
     font-weight: bold;
     margin: 4px 0px;
-}
-.price{
- font-weight: bold;
- color:blue;
-
-}
-.floorPrice{
+  }
+  .price {
+    font-weight: bold;
+  }
+  .floorPrice {
     text-decoration: line-through;
-}
+    color: gray;
+    font-size: 13px;
+    margin: 3px;
+  }
+  .discount{
+    font-size: 12px;
+  }
+  .price{
+    color: black;
+  }
 @media (max-width: 750px) {
     .ProductSildes{
         display: flex;

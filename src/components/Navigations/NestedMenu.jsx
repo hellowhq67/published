@@ -73,7 +73,7 @@ export default function NestedMenu() {
         <Link href="/"> SNEAKERS</Link>
       </li>
       <li  >
-        <Link href="/"> STAFF PICKS</Link>
+        <Link href="/products/staf/"> STAFF PICKS</Link>
       </li>
       <li  >
         <Link href="/products"> COLLECTIONS</Link>

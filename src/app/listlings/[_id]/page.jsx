@@ -6,6 +6,7 @@ export default function page({ params: { _id} }) {
     <div>
 
       <ProductDetail productId={_id}/>
+      
     </div>
   )
 }

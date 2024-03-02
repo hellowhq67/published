@@ -10,7 +10,53 @@ import Typography from "@mui/material/Typography";
 import Link from 'next/link';
 import axios from 'axios';
 import Footer from '@/components/Navigations/Footer'
+import { UseAuth } from '../context/AuthContext'
 export default function page() {
+
+  const followProduct = async (productId) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/follow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          userId:"afsaf", 
+          productId:"fpshf" })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Product followed successfully, show alert or update UI
+        alert(data.message);
+        // Update UI or perform any other action as needed
+      } else {
+        // Handle other status codes, if needed
+        console.error('Error:', data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const unfollowProduct = async (productId) => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/api/follow/${productId}`);
+      console.log(response.data.message); // Optionally log success message
+      // Add logic to handle success, e.g., updating UI
+    } catch (error) {
+      console.error('Error unfollowing product:', error);
+      // Add logic to handle error, e.g., showing an error message
+    }
+  };
+
+  const showToast = (message) => {
+    // Implement your toast notification logic here
+    alert(message);
+  };
+
+
   const [products, setProducts] = useState([]);
   const [filters, setFilters] = useState({});
   const [sidebarOpen, setSidebarOpen] = useState(false); // Step 1
@@ -85,6 +131,9 @@ export default function page() {
     }
     return true;
   };
+  const calculateDiscountPercentage = (price, floorPrice) => {
+    return ((price - floorPrice) / price) * 100;
+  };
   return (
 
     <div>
@@ -112,7 +161,7 @@ export default function page() {
         </div>
       </div>
       <div className={style.wrapper}>
-        <div className={`${style.productFilter } ${sidebarOpen? "" : style.closed}`}>
+        <div className={`${style.productFilter} ${sidebarOpen ? "" : style.closed}`}>
           <div className={style.sizeBox}>
             <p>Set up to filter out listings that are not in your size.</p>
             <button className={style.btn}>ADD MY SIZE</button>
@@ -454,7 +503,7 @@ export default function page() {
           {products.filter(filterProducts).map((x) => {
             return <>
 
-              <div className={style.ProductSildes}>
+              <div key={x._id} className={style.ProductSildes}>
                 <Link style={{ textDecoration: "none", cursor: "pointer", color: "black" }} href={`/listlings/${x._id}`} passHref>
                   <div className={style.imgCol}>
                     <img src={x.productImage1} alt="" />
@@ -469,27 +518,16 @@ export default function page() {
                 </Link>
                 <div className={style.priceCol}>
                   <p className={style.price}>
-                    ${x.price}{" "}
+                    <span style={{ color: "red", margin: "0px 2px" }}> ${x.price}</span>
                     <span className={style.floorPrice}>
                       ${x.floorPrice}
                     </span>
+                    <span className={style.discount}>  {`${calculateDiscountPercentage(x.price, x.floorPrice).toFixed(0)}% off`}</span>
                   </p>
-                  <button className={style.btn}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      width={24}
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                      />
-                    </svg>
-                  </button>
+                  {x._id && <button className={style.btn} onSubmit={() => followProduct()}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+</svg>
+</button>}
                 </div>
               </div>
             </>

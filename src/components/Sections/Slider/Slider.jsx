@@ -1,16 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination } from "swiper";
-import axios from "axios"; // Import axios for data fetching
+import axios from "axios";
 import Link from "next/link";
 import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
 import style from "./Style.module.css";
-
-// Initialize Swiper core components
-SwiperCore.use([Pagination]);
-
+import { Navigation } from "swiper/modules";
 export default function Slider() {
   const [products, setProducts] = useState([]);
 
@@ -27,12 +24,16 @@ export default function Slider() {
       console.error("Error fetching products:", error);
     }
   };
-
+  const calculateDiscountPercentage = (price, floorPrice) => {
+    return ((price - floorPrice) / price) * 100;
+  }
   return (
     <div className={style.wrapper}>
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
+        navigation={true}
+        modules={[Navigation]} // Enable navigation buttons
         pagination={{
           clickable: true,
         }}
@@ -57,12 +58,11 @@ export default function Slider() {
         className="mySwiper"
       >
         {products.map((product) => (
-          <SwiperSlide key={product.productID}>
+          <SwiperSlide key={product._id}>
             <div className={style.ProductSildes}>
-              {/* Use Link component from Next.js for client-side navigation */}
               <Link
-               style={{textDecoration:"none",color:"black"}} href={`/listlings/${product.productID}`}
-            
+               style={{ textDecoration: "none", cursor: "pointer", color: "black" }}
+                href={`/listlings/${product._id}`}
               >
                 <div className={style.link}>
                   <div className={style.imgCol}>
@@ -79,9 +79,17 @@ export default function Slider() {
               </Link>
               <div className={style.priceCol}>
                 <p className={style.price}>
-                  ${product.price}{" "}
-                  <span className={style.floorPrice}>
-                    ${product.floorPrice}
+                  <span style={{ color: "red", margin: "0px 2px" }}>
+                    {" "}
+                    ${product.price}
+                  </span>
+                  <span className={style.floorPrice}>${product.floorPrice}</span>
+                  <span className={style.discount}>
+                    {" "}
+                    {`${calculateDiscountPercentage(
+                      product.price,
+                      product.floorPrice
+                    ).toFixed(0)}% off`}
                   </span>
                 </p>
                 <button className={style.btn}>
@@ -89,7 +97,7 @@ export default function Slider() {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5" // Change to strokeWidth instead of stroke-width
+                    strokeWidth="1.5"
                     stroke="currentColor"
                     width={24}
                   >

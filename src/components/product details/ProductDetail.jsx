@@ -8,49 +8,12 @@ import ProductSider from "../ProdctSider/ProductSider";
 import Navbar from "../Navigations/Navbar";
 import NestedMenu from "../Navigations/NestedMenu";
 import { Siemreap } from "next/font/google";
+import ProductButton from "../Addwishlist/ProductButton";
 
 function ProductDetail({ productId }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isFollowing, setIsFollowing] = useState(false);
 
-
-  const handleFollow = async () => {
-    try {
-      const response = await fetch('http://localhost:3001/api/follow/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId:"w958525825",
-          productId: productId,
-        }),
-      });
-      if (response.ok) {
-        setIsFollowing(true);
-      } else {
-        console.error('Failed to follow product');
-      }
-    } catch (error) {
-      console.error('Error following product:', error);
-    }
-  };
-
-  const handleUnfollow = async () => {
-    try {
-      const response = await fetch(`http://localhost:3001/api/follow/${productId}`, {
-        method: 'DELETE',
-      });
-      if (response.ok) {
-        setIsFollowing(false);
-      } else {
-        console.error('Failed to unfollow product');
-      }
-    } catch (error) {
-      console.error('Error unfollowing product:', error);
-    }
-  };
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -112,12 +75,7 @@ function ProductDetail({ productId }) {
           <span>Shipping: {product.shippings}</span>
           <button className={styles.btn1}>PURCHASE</button>
 
-          {isFollowing ? (
-            <button className={styles.btn2} onClick={handleUnfollow}>Unfollow</button>
-          ) : (
-            <button className={styles.btn2} onClick={handleFollow}>Follow</button>
-          )}
-
+        <ProductButton productId={productId} />
           <div className={styles.sellerInfo}>
             <p style={{ fontSize: "18px", fontWeight: "bold" }}>
               {product.userName}

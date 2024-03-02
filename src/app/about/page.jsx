@@ -89,7 +89,6 @@ export default function page() {
               </div>
             </div>
             <img src={blog.blogimg} alt="" />
-           
           </div>
         ))}
       </div>
@@ -102,7 +101,7 @@ export default function page() {
       ></div>
 
       <div className={styles.contentCol}>
-      {section3.map((blog) => (
+        {section3.map((blog) => (
           <div className={styles.contentCards}>
             <img src={blog.blogimg} alt="" />
             <div className={styles.desc}>
@@ -117,7 +116,6 @@ export default function page() {
         ))}
         {section4.map((blog) => (
           <div className={styles.contentCards}>
-           
             <img src={blog.blogimg} alt="" />
             <div className={styles.desc}>
               <h2>{blog.title}</h2>
