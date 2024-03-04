@@ -7,9 +7,11 @@ import Slider from "@/components/Sections/Slider/Slider";
 import ProductSider from "../ProdctSider/ProductSider";
 import Navbar from "../Navigations/Navbar";
 import NestedMenu from "../Navigations/NestedMenu";
-import { Siemreap } from "next/font/google";
-import ProductButton from "../Addwishlist/ProductButton";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import Link from "next/link";
 function ProductDetail({ productId }) {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -75,25 +77,76 @@ function ProductDetail({ productId }) {
           <span>Shipping: {product.shippings}</span>
           <button className={styles.btn1}>PURCHASE</button>
 
-        <ProductButton productId={productId} />
-          <div className={styles.sellerInfo}>
-            <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-              {product.userName}
-            </p>
-            <span style={{ margin: "20px 0px" }}>
-              {" "}
-              <Rating
-                name="half-rating-read"
-                defaultValue={2.5}
-                precision={0.5}
-                readOnly
-              />{" "}
-              4reivews
-            </span>
-            <p style={{ margin: "10px 0px" }}>
-              9 Transactions <span>4 items for sell</span>
-            </p>
-          </div>
+          <button className={styles.btn2}>Follow</button>
+          <Swiper
+            pagination={{
+              dynamicBullets: true,
+            }}
+            modules={[Pagination]}
+            className={styles.swiper}
+          >
+            <SwiperSlide className={styles.swiperslide}>
+              <Link style={{textDecoration:"none"}} href={`/profile/designer/${product.userId}`}>
+                <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+                  {product.userName}
+                </div>
+                <span style={{ margin: "10px 0px" }}>
+                  {" "}
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={2.5}
+                    precision={0.5}
+                    readOnly
+                  />{" "}
+                  3reivews
+                </span>
+                <div style={{ margin: "10px 0px" }}>
+                  9 Transactions <span>12 items for sell</span>
+                </div>
+              </Link>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiperslide}>
+            <Link style={{textDecoration:"none"}} href={`/profile/designer/${product.userId}`}>
+                <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+                  {product.userName}
+                </div>
+                <span style={{ margin: "10px 0px" }}>
+                  {" "}
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={2.5}
+                    precision={0.5}
+                    readOnly
+                  />{" "}
+                  4reivews
+                </span>
+                <div style={{ margin: "10px 0px" }}>
+                  9 Transactions <span>4 items for sell</span>
+                </div>
+              </Link>
+            </SwiperSlide>
+            <SwiperSlide className={styles.swiperslide}>
+            <Link style={{textDecoration:"none"}} href={`/profile/designer/${product.userId}`}>
+                <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+                  {product.userName}
+                </div>
+                <span style={{ margin: "10px 0px" }}>
+                  {" "}
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={2.5}
+                    precision={0.5}
+                    readOnly
+                  />{" "}
+                  4reivews
+                </span>
+                <div style={{ margin: "10px 0px" }}>
+                  9 Transactions <span>4 items for sell</span>
+                </div>
+              </Link>
+            </SwiperSlide>
+          </Swiper>
+
           <h2>Description</h2>
 
           <p>{product.description}</p>

@@ -2,7 +2,8 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider } from 'firebase/auth';
 import { auth, db } from '../firebase';
-import { setDoc, doc } from "firebase/firestore";
+import { collection, doc, setDoc,getDocs,updateDoc } from "firebase/firestore";
+
 
 const AuthContext = createContext();
 
@@ -28,7 +29,7 @@ export const AuthContextProvider = ({ children }) => {
     signOut(auth);
   };
 
-  const updateProfile = async (displayName, bio, phoneNumber, location) => {
+  const updateProfile = async (displayName, bio, phoneNumber, location, profileimgae) => {
     try {
       // Update user's data in Firestore
       if (auth.currentUser) {
@@ -39,11 +40,143 @@ export const AuthContextProvider = ({ children }) => {
           bio: bio,
           phoneNumber: phoneNumber,
           location: location,
+          profileimgae: profileimgae,
         };
         await setDoc(userRef, userData, { merge: true });
       }
     } catch (error) {
       console.error("Error updating profile:", error.message);
+    }
+  };
+
+  const PaymentUpdate = async (cardNumber, expireDate, country, cvc, zip) => {
+    try {
+      // Update user's data in Firestore
+      if (auth.currentUser) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userData = {
+
+          payment: {
+            cardNumber: cardNumber,
+            expireDate: expireDate,
+            country: country,
+            cvc: cvc,
+            zip: zip,
+          },
+
+        };
+        await setDoc(userRef, userData, { merge: true });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error.message);
+    }
+  };
+  const bussinessInfo = async (country, taxId) => {
+    try {
+      // Update user's data in Firestore
+      if (auth.currentUser) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userData = {
+
+          bussinessRegistration: {
+            country: country,
+            taxId: taxId,
+          }
+
+        };
+        await setDoc(userRef, userData, { merge: true });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error.message);
+    }
+  };
+  const AddressDetails = async (name,
+    streetaddress,
+    country,
+    apt,
+    state,
+    zipcode,) => {
+    try {
+      // Update user's data in Firestore
+      if (auth.currentUser) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userData = {
+          displayName: currentUser.displayName,
+          email: currentUser.email,
+          address: {
+            name: name,
+            streetaddress: streetaddress,
+            country: country,
+            apt: apt,
+            state: state,
+            zipcode: zipcode,
+          },
+
+        };
+        await setDoc(userRef, userData, { merge: true });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error.message);
+    }
+  };
+  // for the developer 
+  const ActivePayementMetod = async () => {
+    try {
+      // Update user's data in Firestore
+      if (auth.currentUser) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userData = {
+
+          //add payment Provider paypa stri
+
+        };
+        await setDoc(userRef, userData, { merge: true });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error.message);
+    }
+  };
+  // for the developer  after add pyament method work with the feedback section remove the dummy data form it
+  const FeebackFunction = async (sellerID, date, description, bacth, productName, customerId, customerDisplayName, desinger, productimgae) => {
+    try {
+      // Update user's data in Firestore
+      if (auth.currentUser) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userData = {
+
+          feedbacks: [
+            {
+              sellerID: sellerID,// seller Id is on monodb models product Scheema
+              date: Date.now(),
+              reting: 0,
+              description: description,
+              bacth: bacth,
+              productName: productName,
+              desinger: desinger, //seller name
+              productimgae: productimgae,
+              customerId: customerId,
+              customerDisplayName: customerDisplayName, // customer id is the user uid
+            },
+
+          ],
+
+        };
+        await setDoc(userRef, userData, { merge: true });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error.message);
+    }
+  };
+  const getAllUsersData = async () => {
+    try {
+      const usersCollectionRef = collection(db, "users");
+      const snapshot = await getDocs(usersCollectionRef);
+      const usersData = snapshot.docs.map(doc => doc.data());
+      console.log("Users data:", usersData); // Log the retrieved users data
+      return usersData;
+    } catch (error) {
+      console.error("Error fetching all users data:", error.message);
+      return [];
     }
   };
 
@@ -56,15 +189,64 @@ export const AuthContextProvider = ({ children }) => {
         const userData = {
           displayName: currentUser.displayName,
           email: currentUser.email,
+          feedbacks: [
+            {
+              sellerID: currentUser.uid,
+              date: Date.now(),
+              reting: 0,
+              description: 'very nice',
+              bacth: 'Item as described',
+              productName: "Nike Vintage Y2K Nylon Baggy Track Pants Double Swoosh",
+              desinger: "",
+              productimgae: "https://media-assets.grailed.com/prd/listing/temp/9bd7f114f90e4c85a799184484e5aa2f?w=120&fit=clip&q=40&auto=format",
+              customerId: "",
+              customerDisplayName: "freed"
+            },
+            {
+              sellerID: currentUser.uid,
+              date: Date.now(),
+              reting: 4,
+              description: "very nice",
+              bacth: 'fast shipper',
+              productName: "Nike Vintage Y2K Nylon Baggy Track Pants Double Swoosh",
+              desinger: "",
+              productimgae: "https://media-assets.grailed.com/prd/listing/temp/542cf3edad86493a9600e874434abe0c?w=120&fit=clip&q=40&auto=format",
+              customerId: "",
+              customerDisplayName: "jhon"
+
+            },
+            {
+              sellerID: currentUser.uid,
+              date: Date.now(),
+              reting: 3,
+              description: "very nice",
+              bacth: 'quick reply',
+              productName: "Nike Vintage Y2K Nylon Baggy Track Pants Double Swoosh",
+              desinger: currentUser.displayName,
+              productimgae: "https://media-assets.grailed.com/prd/listing/temp/542cf3edad86493a9600e874434abe0c?w=120&fit=clip&q=40&auto=format",
+              customerId: "",
+              customerDisplayName: "roman"
+            }
+          ],
+
+          follow: [],
+          wishlist: [
+
+          ],
+          transtion: 0,
+
+
+
         };
         await setDoc(userRef, userData, { merge: true });
+        getAllUsersData()
       }
     });
     return () => unsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, googleSignIn, facebookSignIn, appleSignIn, logOut, updateProfile }}>
+    <AuthContext.Provider value={{ user, googleSignIn, facebookSignIn, appleSignIn, logOut, updateProfile, PaymentUpdate, AddressDetails, bussinessInfo,getAllUsersData }}>
       {children}
     </AuthContext.Provider>
   );

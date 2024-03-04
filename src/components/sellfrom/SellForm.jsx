@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useId } from "react";
+import React, { useEffect } from "react";
 import style from "./style.module.css";
 import { useState } from "react";
 import { UseAuth } from "@/app/context/AuthContext";
@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 export default function SellForm() {
-  const router = useRouter()
+  const router = useRouter();
   const { user } = UseAuth();
   const userIds = user ? user.uid : null;
   const userName = user ? user.displayName : null;
@@ -37,10 +37,10 @@ export default function SellForm() {
   const [filteredSubCategories, setFilteredSubCategories] = useState([]);
   const [color, setColor] = useState("");
   const [desc, setDesc] = useState("");
-  const [shipment, SetShipment] = useState("");
-  const [price, setPrice] = useState("");
+  const [shipment, SetShipment] = useState(Number);
+  const [price, setPrice] = useState(Number);
   const [productName, setProductName] = useState("");
-  const [floorPrice, setFloorprice] = useState("");
+  const [floorPrice, setFloorprice] = useState(Number);
   const [imageUrl, setImageUrl] = useState("");
   const [imageUrl2, setImageUrl2] = useState("");
   const [imageUrl3, setImageUrl3] = useState("");
@@ -56,18 +56,18 @@ export default function SellForm() {
     ACCESSORIES: ["HATS", "BELTS"],
   };
 
+
   const handlePostSubmit = async () => {
     try {
-
       const response = await fetch("http://localhost:3001/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId:userID,
+          userId: userID,
           userName: userName,
-          shippings: shipment,
+          shippings: shipment, // Include shipping charges
           productImage1: imageUrl,
           productImage2: imageUrl2,
           productImage3: imageUrl3,
@@ -85,19 +85,16 @@ export default function SellForm() {
           department: department,
           category: category,
           subcategory: selectedSubCategory,
-          tag:[tags],
+          tag: [tags],
         }),
-      
       });
 
       const responseData = await response.json();
       console.log("Response:", responseData);
 
       if (response.status === 201) {
-        toast.success("Product created successfully!")
-        router.push("/sell/new")
-        
-        
+        toast.success("Product created successfully!");
+        router.push("/sell/new");
       } else {
         toast.error("Failed to create product!");
       }
@@ -139,8 +136,6 @@ export default function SellForm() {
   const handleSubCategoryChange = (e) => {
     setSelectedSubCategory(e.target.value);
   };
-
-
 
   const handleConditionChange = (e) => {
     setSelectedCondition(e.target.value);
@@ -228,7 +223,12 @@ export default function SellForm() {
               ))}
             </select>
 
-           <input className={style.sizeInput} type="text" onChange={(e)=>setSelectedSize(e.target.value)} placeholder="define your product Size" />
+            <input
+              className={style.sizeInput}
+              type="text"
+              onChange={(e) => setSelectedSize(e.target.value)}
+              placeholder="define your product Size"
+            />
           </div>
 
           <div className={style.inputCol}>
@@ -344,50 +344,46 @@ export default function SellForm() {
             </div>
 
             <div>
-              <h2>Shipment</h2>
-              <textarea
-                name=""
-                id="text2"
-                cols="100"
-                rows="10"
-                placeholder=""
+              <h2>Shipping Cost</h2>
+              <input
+                type="text"
                 onChange={(e) => SetShipment(e.target.value)}
-              ></textarea>
+              />
               <h2 style={{ margin: "20px 0px" }}>Photos</h2>
             </div>
             <h2>DropeZone 1</h2>
-      <div className={style.dropzone}>
-      {!imageUrl && (
-                    <UploadDropzone
-                      endpoint="imageUploader"
-                      onClientUploadComplete={(res) => {
-                        // Do something with the response
-                        const fileUrl = res?.[0]?.url;
-                        setImageUrl(fileUrl);
-                        console.log("Files: ", res);
-                      }}
-                      onUploadError={(error) => {
-                        console.log(error);
-                      }}
-                    />
-                  )}
+            <div className={style.dropzone}>
+              {!imageUrl && (
+                <UploadDropzone
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(res) => {
+                    // Do something with the response
+                    const fileUrl = res?.[0]?.url;
+                    setImageUrl(fileUrl);
+                    console.log("Files: ", res);
+                  }}
+                  onUploadError={(error) => {
+                    console.log(error);
+                  }}
+                />
+              )}
 
-                  {/* Render the uploaded image if imageUrl2 is available */}
-                  {imageUrl && (
-                    <div>
-                      <img
-                        width={220}
-                        src={imageUrl}
-                        className={style.imgs}
-                        alt="Uploaded Image"
-                      />
-                      {/* Button to remove the uploaded image and show UploadDropzone again */}
-                      <button onClick={() => setImageUrl(null)}>
-                        Remove Image
-                      </button>
-                    </div>
-                  )}
-      </div>
+              {/* Render the uploaded image if imageUrl2 is available */}
+              {imageUrl && (
+                <div>
+                  <img
+                    width={220}
+                    src={imageUrl}
+                    className={style.imgs}
+                    alt="Uploaded Image"
+                  />
+                  {/* Button to remove the uploaded image and show UploadDropzone again */}
+                  <button onClick={() => setImageUrl(null)}>
+                    Remove Image
+                  </button>
+                </div>
+              )}
+            </div>
 
             <div className={style.dropzoneWrapper}>
               <div className={style.dropZoneRow}>
@@ -523,7 +519,9 @@ export default function SellForm() {
                 </div>
               </div>
             </div>
-            <button className={style.button1} onClick={handlePostSubmit}>upload</button>
+            <button className={style.button1} onClick={handlePostSubmit}>
+              upload
+            </button>
           </div>
         </div>
       </div>

@@ -7,20 +7,20 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navigations/Navbar";
 import NestedMenu from "../Navigations/NestedMenu";
 import Link from "next/link";
-
+import { UploadDropzone } from "@uploadthing/react";
 function Edit() {
   const { user, updateProfile } = UseAuth();
   const [displayName, setDisplayName] = useState("");
   const [bio, setBio] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [location, setLocation] = useState("");
-
+  const [profileimgae, setprofileimgae] = useState("");
   const handleUpdateProfile = () => {
-    if (!displayName || !bio || !phoneNumber || !location) {
+    if (!displayName || !bio || !phoneNumber || !location||!profileimgae) {
       toast.error("Please fill in all fields.");
       return;
     }
-    updateProfile(displayName, bio, phoneNumber, location);
+    updateProfile(displayName, bio, phoneNumber, location,profileimgae);
     toast.success("Profile updated successfully!");
   };
 
@@ -62,24 +62,24 @@ function Edit() {
           <h1>My account</h1>
           <h2>Edit Profile</h2>
           <div className={style.formFlex}>
-           <div>
-            <p>Username</p>
-           <input
-              type="text"
-              placeholder="Display Name"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-            />
-           </div>
-           <div>
-            <p>ADD Phone Number</p>
-           <input
-              type="text"
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-           </div>
+            <div>
+              <p>Username</p>
+              <input
+                type="text"
+                placeholder="Display Name"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+              />
+            </div>
+            <div>
+              <p>ADD Phone Number</p>
+              <input
+                type="text"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </div>
           </div>
           <select
             value={location}
@@ -98,7 +98,36 @@ function Edit() {
             value={bio}
             onChange={(e) => setBio(e.target.value)}
           ></textarea>
+          <div className={style.dropzone}>
+            {!profileimgae && (
+              <UploadDropzone
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  // Do something with the response
+                  const fileUrl = res?.[0]?.url;
+                  setprofileimgae(fileUrl);
+                  console.log("Files: ", res);
+                }}
+                onUploadError={(error) => {
+                  console.log(error);
+                }}
+              />
+            )}
 
+            {/* Render the uploaded image if imageUrl2 is available */}
+            {profileimgae && (
+              <div>
+                <img
+                  width={120}
+                  src={profileimgae}
+                  className={style.imgs}
+                  alt="Uploaded Image"
+                />
+                {/* Button to remove the uploaded image and show UploadDropzone again */}
+                <button onClick={() => setImageUrl(null)}>Remove Image</button>
+              </div>
+            )}
+          </div>
           <button onClick={handleUpdateProfile}>Update Profile</button>
         </div>
       </div>

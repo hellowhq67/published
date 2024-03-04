@@ -7,7 +7,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import style from "./Style.module.css";
-import { Navigation } from "swiper/modules";
+
+import { Pagination, Navigation } from 'swiper/modules';
+
+
 export default function Slider() {
   const [products, setProducts] = useState([]);
 
@@ -29,14 +32,15 @@ export default function Slider() {
   }
   return (
     <div className={style.wrapper}>
+    <div className={style.flex}><h2>Staff Picks</h2> <Link href='/products/staf'>SEE ALL</Link></div>
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
-        navigation={true}
-        modules={[Navigation]} // Enable navigation buttons
         pagination={{
           clickable: true,
         }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
         breakpoints={{
           "@0.00": {
             slidesPerView: 1,
@@ -48,17 +52,17 @@ export default function Slider() {
           },
           "@1.00": {
             slidesPerView: 3,
-            spaceBetween: 40,
+            spaceBetween: 30,
           },
           "@1.50": {
             slidesPerView: 4,
-            spaceBetween: 40,
+            spaceBetween:10,
           },
         }}
-        className="mySwiper"
+        className={style.swiper}
       >
         {products.map((product) => (
-          <SwiperSlide key={product._id}>
+          <SwiperSlide key={product._id} className={style.swiperslide}>
             <div className={style.ProductSildes}>
               <Link
                style={{ textDecoration: "none", cursor: "pointer", color: "black" }}
@@ -67,7 +71,7 @@ export default function Slider() {
                 <div className={style.link}>
                   <div className={style.imgCol}>
                     <img src={product.productImage1} alt="" />
-                    <span className={style.tags}>{product.vendor}</span>
+                    {!product.vendor?"":<span className={style.tags}>{product.vendor}</span>}
                   </div>
                   <div className={style.descCol}>
                     <p className={style.title}>
@@ -81,9 +85,9 @@ export default function Slider() {
                 <p className={style.price}>
                   <span style={{ color: "red", margin: "0px 2px" }}>
                     {" "}
-                    ${product.price}
+                    ${product.floorPrice?product.floorPrice:''}
                   </span>
-                  <span className={style.floorPrice}>${product.floorPrice}</span>
+                  <span className={style.floorPrice}>${product.price}</span>
                   <span className={style.discount}>
                     {" "}
                     {`${calculateDiscountPercentage(
