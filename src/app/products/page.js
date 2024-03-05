@@ -468,6 +468,8 @@ export default function page() {
                     <img src={x.productImage1} alt="" />
                     {!x.vendor?"":<span className={style.tags}>{x.vendor}</span>}
                   </div>
+                  <p>1 hour 14 munites ago</p>
+                  <hr />
                   <div className={style.descCol}>
                     <p className={style.title}>
                       {x.productName.slice(0, 15)}...

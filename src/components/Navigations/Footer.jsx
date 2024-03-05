@@ -10,16 +10,16 @@ export default function Footer() {
           <Link href="/about"> ABOUT</Link>
         </li>
         <li>
-          <Link href="/pages/about">HELP & FAQ</Link>
+          <Link href="/about/help">HELP & FAQ</Link>
         </li>
         <li>
-          <Link href="/pages/terms">TERMS</Link>
+          <Link href="/about/terms">TERMS</Link>
         </li>
         <li>
           <Link href="/pages/terms/privecy">PRIVACY</Link>
         </li>
         <li>
-          <Link href="/pages/trust">TRUST</Link>
+          <Link href="/about/Trust">TRUST</Link>
         </li>
         <li>
           <Link href="/pages/trust">ACCESSIBILITY</Link>

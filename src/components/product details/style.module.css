@@ -20,20 +20,33 @@
   font-size: 18px;
   background: #fff;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.742);
   padding: 1em;
   border: 1px solid rgba(0, 0, 0, 0.436);
-  border-radius: 10px;
+  border-radius: 4px;
+  height: 200px;
+}
+.feedBackCard{
+  display: flex;
 }
 
-.swiperslide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.reletedSearch{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+   padding: 1rem;
+}
+.reletedSearch p{
+  border: 1px solid black;
+  padding: 10px;
+}
+.selects{
+  width: 400px;
 }
 
 .btn1 {
@@ -65,7 +78,25 @@
   color: white;
   margin: 20px 0px;
 }
+.reportBtns{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.reportBtns button{
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: transparent;
+  align-items: center;
+  display: flex;
 
+}
+.modalInputCOl{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 750px) {
   .wrapper {
     display: flex;

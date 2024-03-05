@@ -8,10 +8,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import style from "./Style.module.css";
 
-import { Pagination, Navigation } from 'swiper/modules';
+;
 
-
-export default function Slider() {
+export default function Cards2() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -22,48 +21,25 @@ export default function Slider() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get("http://localhost:3001/api/products");
-      setProducts(response.data.products.slice(0, 6)); // Slice to get only 6 products
+      setProducts(response.data.products.slice(6, 12)); // Slice to get only 6 products
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
   const calculateDiscountPercentage = (price, floorPrice) => {
     return ((price - floorPrice) / price) * 100;
-  }
+  };
   return (
     <div className={style.wrapper}>
-    <div className={style.flex}><h2>Staff Picks</h2> <Link href='/products/staf'>SEE ALL</Link></div>
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        breakpoints={{
-          "@0.00": {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          "@0.75": {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          "@1.00": {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          "@1.50": {
-            slidesPerView: 4,
-            spaceBetween:10,
-          },
-        }}
-        className={style.swiper}
-      >
-        {products.map((product) => (
-          <SwiperSlide key={product._id} className={style.swiperslide}>
-            <div className={style.ProductSildes}>
+      <div className={style.flex}>
+        <h2>Suprems collection</h2> <Link href="/products/staf">SEE ALL</Link>
+      </div>
+      <div className={style.wrapper2}>
+
+
+      {products.map((product) => (
+       
+            <div className={style.ProductSildes} key={product.id}>
               <Link
                style={{ textDecoration: "none", cursor: "pointer", color: "black" }}
                 href={`/listlings/${product._id}`}
@@ -75,8 +51,8 @@ export default function Slider() {
                   </div>
                   <p>1 hour 14 munites ago</p>
                   <hr />
+                  
                   <div className={style.descCol}>
-             
                     <p className={style.title}>
                       {product.productName.slice(0, 15)}...
                     </p>
@@ -117,9 +93,9 @@ export default function Slider() {
                 </button>
               </div>
             </div>
-          </SwiperSlide>
+
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 }

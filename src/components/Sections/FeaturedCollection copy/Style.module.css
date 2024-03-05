@@ -1,0 +1,87 @@
+.sec{
+  width: 100%;
+  margin: 4rem 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Col {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 20px;
+
+}
+
+.title {
+  margin: 20px;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4rem;
+  width: 100%;
+  height: 100%;
+}
+.Card {
+  width: 20rem;
+  background: whitesmoke;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.316);
+  transition: 0.3s ease;
+}
+.Card:hover {
+  transform: translateY(-5px);
+}
+.Card:hover .desc button {
+  background: blue;
+  color: white;
+  border: none;
+}
+.imgaeCol {
+  position: relative;
+  width: 100%;
+}
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffff;
+  font-size: 2rem;
+}
+.imgaeCol img {
+  width: 100%;
+  object-fit: contain;
+}
+.desc {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  font-size: 12px;
+}
+.desc button {
+  padding: 10px 20px;
+  font-size: 10px;
+}
+
+@media (max-width: 750px) {
+  .section {
+    margin: 2rem 0px;
+    width: 100%;
+  }
+  .Card {
+    width: 20rem;
+    background: whitesmoke;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.316);
+    transition: 0.3s ease;
+  }
+  .heading {
+    margin: 20px 0px;
+    font-size: 20px;
+    text-align: center;
+  }
+}

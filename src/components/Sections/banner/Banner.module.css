@@ -38,6 +38,17 @@
 .btn:hover{
   background: blue;
 }
+
+.bannerCOl{
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  text-align: center;
+  color: white;
+}
 @media (max-width: 750px) {
   .herocontent{
     position: absolute;  
