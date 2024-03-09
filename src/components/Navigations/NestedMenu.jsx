@@ -56,7 +56,7 @@ export default function NestedMenu() {
             <Link href="">OUTERWEAR</Link>
           </li>
           <li>
-            <Link href="">FOOTWEAR</Link>
+            <Link href="/products/cetagory/menswear/footwear">FOOTWEAR</Link>
           </li>
           <li>
             <Link href="">TAILORING</Link>
@@ -67,10 +67,12 @@ export default function NestedMenu() {
         </ul>
       </li>
       <li  >
-        <Link href=""> WOMENSWEAR</Link>
+        <Link className={style.sub1} href="/products/cetagory/womenswear/top"> WOMENSWEAR</Link>
+       
       </li>
       <li  >
         <Link href="/"> SNEAKERS</Link>
+        
       </li>
       <li  >
         <Link href="/products/staf/"> STAFF PICKS</Link>

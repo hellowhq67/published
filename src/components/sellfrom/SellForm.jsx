@@ -7,7 +7,63 @@ import { UploadDropzone } from "@uploadthing/react";
 import ProductFlter from "../productFilter/ProductFlter";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { styled } from "@mui/material/styles";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
 import { useRouter } from "next/navigation";
+
+const IOSSwitch = styled((props) => (
+  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+))(({ theme }) => ({
+  width: 42,
+  height: 26,
+  padding: 0,
+  "& .MuiSwitch-switchBase": {
+    padding: 0,
+    margin: 2,
+    transitionDuration: "300ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
+        opacity: 1,
+        border: 0,
+      },
+      "&.Mui-disabled + .MuiSwitch-track": {
+        opacity: 0.5,
+      },
+    },
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
+    },
+    "&.Mui-disabled .MuiSwitch-thumb": {
+      color:
+        theme.palette.mode === "light"
+          ? theme.palette.grey[100]
+          : theme.palette.grey[600],
+    },
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
+    },
+  },
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
+    width: 22,
+    height: 22,
+  },
+  "& .MuiSwitch-track": {
+    borderRadius: 26 / 2,
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
+    opacity: 1,
+    transition: theme.transitions.create(["background-color"], {
+      duration: 500,
+    }),
+  },
+}));
+
 export default function SellForm() {
   const router = useRouter();
   const { user } = UseAuth();
@@ -23,6 +79,7 @@ export default function SellForm() {
       setUsername(userName);
     };
     checkAuthentication();
+    console.log(acceptOffer)
   }, [user]);
 
   const [selectedSize, setSelectedSize] = useState("");
@@ -47,6 +104,10 @@ export default function SellForm() {
   const [imageUrl4, setImageUrl4] = useState("");
   const [imageUrl5, setImageUrl5] = useState("");
   const [tags, setTags] = useState([]);
+  const [acceptOffer,setAcceptOffer]=useState("")
+  const handeloffer=(event)=>{
+    setAcceptOffer(event.target.checked);
+  }
   const subCategoriesMapMen = {
     TOPS: ["LONG SLEEVE T-SHIRTS", "POLOS"],
     BOTTOMS: ["CASUAL PANTS", " CROPPED PANTS", "DENIM"],
@@ -55,7 +116,6 @@ export default function SellForm() {
     TAILORING: ["SUITS", "BLAZERS"],
     ACCESSORIES: ["HATS", "BELTS"],
   };
-
 
   const handlePostSubmit = async () => {
     try {
@@ -86,6 +146,7 @@ export default function SellForm() {
           category: category,
           subcategory: selectedSubCategory,
           tag: [tags],
+          acceptOffer:acceptOffer,
         }),
       });
 
@@ -259,6 +320,19 @@ export default function SellForm() {
               />
             </div>
 
+            <div style={{ display: "flex", alignItems: "center", gap: "40px" }}>
+              <FormControlLabel
+                control={
+                  <IOSSwitch
+                    sx={{ m: 1 }}
+                    defaultChecked={acceptOffer}
+                    onChange={handeloffer}
+                  />
+                }
+                label="Accept offer"
+              />
+            </div>
+            <hr />
             <div>
               <h2>Floor Price</h2>
               <input

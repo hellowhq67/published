@@ -79,6 +79,7 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+  border: 1px solid black;
 }
 .nestedmenu li {
   margin: 20px 40px;
@@ -121,6 +122,13 @@
     right: -100%;
     box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.582);
     z-index: 2;
+    padding: 10px;
+}
+.subMenu1subMenu li {
+  margin: 10px;
+}
+.subMenu1subMenu li a{
+  font-size: 14px;
 }
 .submenu2Sub:hover .subMenu2subMenu{
     display: flex;
@@ -138,11 +146,19 @@
     background: white;
     box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.582);
 }
+.subMenu2subMenu li a{
+  font-size: 14px;
+}
+.subMenu2subMenu li {
+  margin: 10px 0px;
+}
 /*===================================================================================================*/
 .footerWrapper{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid black;
+  padding: 10px;
   
 }
 .footerLinks{

@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import style from "./Style.module.css";
 
-;
+
 
 export default function Cards2() {
   const [products, setProducts] = useState([]);
@@ -21,7 +21,7 @@ export default function Cards2() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get("http://localhost:3001/api/products");
-      setProducts(response.data.products.slice(6, 12)); // Slice to get only 6 products
+      setProducts(response.data.products.slice(6, 11)); // Slice to get only 6 products
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -32,7 +32,7 @@ export default function Cards2() {
   return (
     <div className={style.wrapper}>
       <div className={style.flex}>
-        <h2>Suprems collection</h2> <Link href="/products/staf">SEE ALL</Link>
+        <h2>Deals On Similar Listings </h2> <Link style={{fontWeight:"bolder"}} href="/products/staf">{'SEE ALL ->'}</Link>
       </div>
       <div className={style.wrapper2}>
 
@@ -49,7 +49,8 @@ export default function Cards2() {
                     <img src={product.productImage1} alt="" />
                     {!product.vendor?"":<span className={style.tags}>{product.vendor}</span>}
                   </div>
-                  <p>1 hour 14 munites ago</p>
+                  <p> about 1 hour <span style={{textDecoration:"line-through"}}>{'(23 days)'}</span></p>
+               
                   <hr />
                   
                   <div className={style.descCol}>
@@ -92,6 +93,7 @@ export default function Cards2() {
                   </svg>
                 </button>
               </div>
+              <Link style={{fontSize:"14px",color:"black"}} href='/products'>see more</Link>
             </div>
 
         ))}

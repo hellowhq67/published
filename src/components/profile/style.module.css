@@ -121,6 +121,7 @@
   font-size: 1rem;
 
 }
+
 @media (max-width:750px) {
   .profileCol {
     display: flex;
@@ -130,27 +131,240 @@
     width: 100vw;
     
   }
+ 
+  .formFlex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
   .profileRow{
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
     gap: 24px;
+    font-size: 15px;
+  }
+  .profileEditWrappper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    height: 100%;
+  }
+  .profileEditWrappper div {
+    width: 100%;
+    padding: 10px;
+    height: 100%;
   }
   .profileWrapper{
     width: 100%;
     padding: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
   }
   .profileInfo {
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
   }
   .tab{
     display: none;
   }
+}
+.ProductSildes{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 15rem;
+}
+.imgCol {
+  position: relative;
+
+} 
+.border1{
+width: 30rem;
+height: 1px;
+background: black;
+}
+
+.imgCol img{
+  width: 15rem;
+  height: 16rem;
+}
+.tags{
+  position: absolute;
+  top:4%;
+  left: 2%;
+  background-color: black;
+  color: whitesmoke;
+  padding: 5px 4px;
+}
+.descCol{
+  display: flex;
+  align-items: flex-start;
+  justify-content:flex-start;
+  flex-direction: column;
+  
+}
+.flex{
+display: flex;
+align-items: center;
+width: 100%;
+justify-content:space-between;
+margin: 6px 0px;
+padding: 20px 13rem;
+}
+.wrapper{
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  width: 100vw;
+  height: 100%;
+
+
+}
+.wrapper2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  gap: 10px;
+}
+
+
+.priceCol {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0px;
+}
+.btn {
+  background: transparent;
+  border: none;
+}
+.title {
+  font-weight: bold;
+  margin: 4px 0px;
+}
+.price {
+  font-weight: bold;
+}
+.floorPrice{
+  text-decoration: line-through;
+  color: gray;
+  font-size: 13px;
+  margin: 3px;
+}
+.discount{
+  font-size: 12px;
+}
+.price{
+  color: black;
+  
+}
+.floorPrice {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 13px;
+  margin: 3px;
+}
+.sellerScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+.feedcard {
+  display: flex;
+  width: 45rem;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.253);
+  margin: 40px 0px;
+  padding: 1rem;
+  gap: 20px;
+}
+.feedcard img {
+  width: 100px;
+}
+.feedbackCol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.batchFiled {
+  display: flex;
+  gap: 10px;
+}
+.feedData {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.close{
+  display: none;
+}
+.sallerFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 4rem 0px;
+  text-align: center;
+  background: rgb(254, 254, 254);
+}
+.bacthCOL {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+@media (max-width: 750px) {
+  .ProductSildes{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 15rem;
+  }
+  .wrapper{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      width: 100%;
+      height: 100%;
+  
+  }
+  .wrapper2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100vw;
+    gap: 20px;
+  }
+  .flex{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content:space-between;
+    margin: 6px 0px;
+    padding: 20px 1rem;
+    }
+    .profileLink{
+      display: none;
+    }
 }

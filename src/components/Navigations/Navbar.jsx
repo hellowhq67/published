@@ -151,7 +151,7 @@ export default function Navbar() {
                 </div>
               </Link>
               <div className={style.prfilDropdown}>
-                <Link href={`/profile/${user.uid}}`}> {user.displayName} </Link>
+                <Link href={`/profile/${user.uid}`}> {user.displayName} </Link>
                 <Link href={"/massages"}>MESSAGES</Link>
                 <Link href={"/favorites/"}>FAVORITES</Link>
                 <Link href={"/massages"}>PURCHASES</Link>

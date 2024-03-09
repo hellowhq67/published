@@ -1,11 +1,11 @@
 import Public from '@/components/profile/public/Public'
 import React from 'react'
 
-export default function page({ params: {userID} }) {
+export default function page({ params: {id} }) {
   return (
     <div>
       
-      <Public sellerID={userID} />
+      <Public sellerID={id} />
    
     </div>
   )

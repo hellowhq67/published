@@ -189,11 +189,12 @@ export const AuthContextProvider = ({ children }) => {
         const userData = {
           displayName: currentUser.displayName,
           email: currentUser.email,
+          userid: currentUser.uid,
           feedbacks: [
             {
               sellerID: currentUser.uid,
               date: Date.now(),
-              reting: 0,
+              reting: 1,
               description: 'very nice',
               bacth: 'Item as described',
               productName: "Nike Vintage Y2K Nylon Baggy Track Pants Double Swoosh",

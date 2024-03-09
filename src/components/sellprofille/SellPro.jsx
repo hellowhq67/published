@@ -6,6 +6,7 @@ import { UseAuth } from "@/app/context/AuthContext";
 import style from "./style.module.css";
 import Link from "next/link";
 import axios from "axios";
+import { Rating, StarIcon } from "@mui/material";
 const fetchProducts = async () => {
   try {
     const response = await axios.get("http://localhost:3001/api/products");
@@ -17,8 +18,50 @@ const fetchProducts = async () => {
 };
 export default function SellPro({ userID }) {
   const [loading, setLoading] = useState(true);
-  const { user } = UseAuth();
+
+  const { getAllUsersData } = UseAuth();
   const [products, setProducts] = useState([]);
+  const [userData, setUserData] = useState({
+    location: "",
+    userDisplayName: "",
+    userBio: "",
+    reting: "",
+    transaction: "",
+    profileImage: "",
+    feedbacks: Number,
+    feedbacksdata: [],
+  });
+  useEffect(() => {
+    const fetChUserData = async () => {
+      try {
+        const usersData = await getAllUsersData();
+        const user = usersData.find((user) => user.userid === userID);
+        console.log("user", user);
+
+        if (user) {
+          setUserData({
+            location: user.location || "",
+            userDisplayName: user.displayName || "",
+            userBio: user.bio || "",
+            reting: user.reting || "",
+            transaction: user.feedbacks.length || "",
+            profileImage: user.profileimgae || "",
+            feedbacks: user.feedbacks.length || "",
+            feedbacksdata: [user.feedbacks] || "",
+          });
+         
+          // Save user data to local storage
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setLoading(false);
+      }
+    };
+
+ 
+    fetChUserData();
+
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,60 +96,79 @@ export default function SellPro({ userID }) {
       </div>
       <div className={style.profileWrapper}>
         <div className={style.profileCol}>
-          <div className={style.prfileRow}>
+          <div className={style.proimg}>
             <img
               className={style.proImgae}
-              src={
-                "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?size=626&ext=jpg&ga=GA1.1.1502403816.1643644406&semt=sph"
-              }
+              src={userData.profileImage}
               alt=""
             />
-            <div className={style.prfileFlex}>
-              {user ? (
-                <div>
-                  {user.displayName && <h2>{user.displayName}</h2>}
-                  {user.email && <p>Email: {user.email}</p>}
-                </div>
-              ) : (
-                <div>Not logged in</div>
-              )}
+            <div className={style.infos}>
+              <h1>{userData.userDisplayName}</h1>
+              <h4>Joined in 2024</h4>
+              <p style={{display:"flex"}}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  width={20}
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                  />
+                </svg>
+                {userData.location}
+              </p>
             </div>
           </div>
+
           <div className={style.profileInfo}>
             <div>
-              <p> No feedback yet</p>
+              <span>
+                {" "}
+                {userData.feedbacks}
+                <Rating
+                  name="half-rating-read"
+                  defaultValue={3}
+                  precision={0.5}
+                  readOnly
+                  style={{ color: "green" }}
+                />
+              </span>
+              <p> reviews</p>
             </div>
             <div>
-              <span>0</span>
+              <span>{userData.transaction}</span>
               <p>Transactions</p>
             </div>
             <div>
               <span>0</span>
-              <p>Follweres</p>
+              <p>Followers</p>
             </div>
           </div>
         </div>
         <div className={style.buttonCol}>
-          <button
-            style={{ background: "black", color: "white" }}
-            className={style.edits}
-          >
-            <Link style={{ color: "white" }} href={`/sell/new/`}>
-              + NEW LISTINGS
-            </Link>
-          </button>
+          <button className={style.edits}><Link href='/sell/new'>{'+ NEW LISTINGS'}</Link></button>
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               width={40}
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
               />
             </svg>

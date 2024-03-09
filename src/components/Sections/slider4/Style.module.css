@@ -1,112 +1,133 @@
 .ProductSildes{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 15rem;
 }
 .imgCol {
-    position: relative;
+  position: relative;
 
 } 
+.border1{
+width: 30rem;
+height: 1px;
+background: black;
+}
 
 .imgCol img{
-    width: 15rem;
-    height: 16rem;
+  width: 15rem;
+  height: 16rem;
 }
 .tags{
-    position: absolute;
-    top:4%;
-    left: 2%;
-    background-color: black;
-    color: whitesmoke;
-    padding: 5px 4px;
+  position: absolute;
+  top:4%;
+  left: 2%;
+  background-color: black;
+  color: whitesmoke;
+  padding: 5px 4px;
 }
 .descCol{
-    display: flex;
-    align-items: flex-start;
-    justify-content:flex-start;
-    flex-direction: column;
-    
+  display: flex;
+  align-items: flex-start;
+  justify-content:flex-start;
+  flex-direction: column;
+  
 }
 .flex{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content:space-between;
-  margin: 6px 0px;
-  padding: 4rem;
+display: flex;
+align-items: center;
+width: 100%;
+justify-content:space-between;
+margin: 6px 0px;
+padding: 20px 13rem;
 }
 .wrapper{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+
+}
+.wrapper2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  gap: 10px;
+}
+
+
+.priceCol {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0px;
+}
+.btn {
+  background: transparent;
+  border: none;
+}
+.title {
+  font-weight: bold;
+  margin: 4px 0px;
+}
+.price {
+  font-weight: bold;
+}
+.floorPrice{
+  text-decoration: line-through;
+  color: gray;
+  font-size: 13px;
+  margin: 3px;
+}
+.discount{
+  font-size: 12px;
+}
+.price{
+  color: black;
+  
+}
+.floorPrice {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 13px;
+  margin: 3px;
+}
+@media (max-width: 750px) {
+  .ProductSildes{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 15rem;
+  }
+  .wrapper{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      width: 100%;
+      height: 100%;
+  
+  }
+  .wrapper2{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-
-}
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-.swiperslide{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.priceCol {
+    flex-wrap: wrap;
+    width: 100vw;
+    gap: 20px;
+  }
+  .flex{
     display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
-    margin: 4px 0px;
-  }
-  .btn {
-    background: transparent;
-    border: none;
-  }
-  .title {
-    font-weight: bold;
-    margin: 4px 0px;
-  }
-  .price {
-    font-weight: bold;
-  }
-  .floorPrice{
-    text-decoration: line-through;
-    color: gray;
-    font-size: 13px;
-    margin: 3px;
-  }
-  .discount{
-    font-size: 12px;
-  }
-  .price{
-    color: black;
-    
-  }
-  .floorPrice {
-    text-decoration: line-through;
-    color: gray;
-    font-size: 13px;
-    margin: 3px;
-  }
-@media (max-width: 750px) {
-    .ProductSildes{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        width: 15rem;
-    }
-    .wrapper{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        width: 100%;
-        height: 100%;
-    
+    width: 100%;
+    justify-content:space-between;
+    margin: 6px 0px;
+    padding: 20px 1rem;
     }
 }

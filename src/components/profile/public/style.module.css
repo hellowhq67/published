@@ -9,8 +9,14 @@
 }
 .proimg {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 5px;
+}
+.infos{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0px 10px;
 }
 .proimg div {
   display: flex;
@@ -152,12 +158,15 @@
 }
 .feedcard {
   display: flex;
-  width: 30rem;
+  width: 45rem;
   justify-content: space-between;
   border-bottom: 1px solid rgba(128, 128, 128, 0.253);
   margin: 40px 0px;
   padding: 1rem;
   gap: 20px;
+}
+.feedcard img {
+  width: 100px;
 }
 .feedbackCol {
   display: flex;

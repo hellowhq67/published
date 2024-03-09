@@ -468,7 +468,8 @@ export default function page() {
                     <img src={x.productImage1} alt="" />
                     {!x.vendor?"":<span className={style.tags}>{x.vendor}</span>}
                   </div>
-                  <p>1 hour 14 munites ago</p>
+                  <p> about 1 hour <span style={{textDecoration:"line-through"}}>{'(23 days)'}</span></p>
+
                   <hr />
                   <div className={style.descCol}>
                     <p className={style.title}>

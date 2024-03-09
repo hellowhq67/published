@@ -36,6 +36,8 @@ export default function Designers() {
     
   return (
     <>
+   <div className={style.conteiner}>
+   <div className={style.flexCol}>
     <h2 className={style.title}>Populer Designer</h2>
     <div className={style.wrapper}>
         
@@ -53,6 +55,9 @@ export default function Designers() {
   
         }
       </div>
+    </div>
+
+   </div>
     </>
    
   )

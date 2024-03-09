@@ -23,8 +23,7 @@ const fetchProducts = async () => {
     return [];
   }
 };
-export default function Public({ userID }) {
-  const uids = userID ? userID : "";
+export default function Public({ sellerID }) {
   const { getAllUsersData } = UseAuth();
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -55,7 +54,7 @@ export default function Public({ userID }) {
         setLoading(true); // Set loading to true before fetching data
 
         const usersData = await getAllUsersData();
-        const user = usersData.find((user) => user.id === userID);
+        const user = usersData.find((user) => user.userid === sellerID);
 
         if (user) {
           setUserData({
@@ -86,14 +85,15 @@ export default function Public({ userID }) {
         }
         const fetchData = async () => {
           const allProducts = await fetchProducts();
-          setProducts(allProducts);
+          const filteredProducts = allProducts.filter(
+            (product) => product.userId === sellerID
+          );
+
+          setProducts(filteredProducts);
           setLoading(false);
         };
 
         fetchData();
-        const filteredProducts = products.filter(
-          (product) => product.userId === userID
-        );
 
         setLoading(false); // Set loading to false after fetching data
       } catch (error) {
@@ -103,7 +103,7 @@ export default function Public({ userID }) {
     };
 
     fetchData();
-  }, [getAllUsersData, userID]);
+  }, [getAllUsersData, sellerID]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -183,22 +183,45 @@ export default function Public({ userID }) {
               src={userData.profileImage}
               alt=""
             />
-            <div>
-              <p>{userData.userDisplayName}</p>
-              <p>{userData.location}</p>
+            <div className={style.infos}>
+              <h1>{userData.userDisplayName}</h1>
+              <h4>Joined in 2024</h4>
+              <p style={{display:"flex"}}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  width={20}
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                  />
+                </svg>
+                {userData.location}
+              </p>
             </div>
           </div>
 
           <div className={style.profileInfo}>
-            <div >
+            <div>
               <span>
                 {" "}
                 {userData.feedbacks}
                 <Rating
                   name="half-rating-read"
-                  defaultValue={userData.feedbacks}
+                  defaultValue={3}
                   precision={0.5}
                   readOnly
+                  style={{ color: "green" }}
                 />
               </span>
               <p> reviews</p>
@@ -1025,6 +1048,17 @@ export default function Public({ userID }) {
                                 <img src={x.productImage1} alt="" />
                                 <span className={style.tags}>{x.vendor}</span>
                               </div>
+                              <p>
+                                {" "}
+                                about 1 hour{" "}
+                                <span
+                                  style={{ textDecoration: "line-through" }}
+                                >
+                                  {"(23 days)"}
+                                </span>
+                              </p>
+                              <hr />
+
                               <div className={style.descCol}>
                                 <p className={style.title}>
                                   {x.productName.slice(0, 15)}...
@@ -1088,7 +1122,6 @@ export default function Public({ userID }) {
 
           {activeTab === "feedback" && (
             <>
-              {" "}
               <div className={style.feedbackSection}>
                 <div>
                   <div className={style.sallerFlex}>
@@ -1103,14 +1136,16 @@ export default function Public({ userID }) {
                           defaultValue={userData.feedbacks}
                           precision={0.5}
                           readOnly
+                          style={{ color: "darkgreen" }}
                         />
                       </div>
                       <div className={style.bacthCOL}>
                         <div
                           style={{
-                            background: "rgb(210, 210, 210)",
+                            background: "rgba(255, 255, 255, 0.314)",
                             color: "grey",
                             padding: "8px 10px",
+                            border: "1px solid rgba(54, 52, 52, 0.626)",
                           }}
                         >
                           FAST SHIPPER
@@ -1118,9 +1153,10 @@ export default function Public({ userID }) {
 
                         <div
                           style={{
-                            background: "rgb(210, 210, 210)",
+                            background: "rgba(255, 255, 255, 0.314)",
                             color: "grey",
                             padding: "8px 10px",
+                            border: "1px solid rgba(54, 52, 52, 0.626)",
                           }}
                         >
                           ITEM AS DESCRIBED
@@ -1128,9 +1164,10 @@ export default function Public({ userID }) {
 
                         <div
                           style={{
-                            background: "rgb(210, 210, 210)",
+                            background: "rgba(255, 255, 255, 0.314)",
                             color: "grey",
                             padding: "8px 10px",
+                            border: "1px solid rgba(54, 52, 52, 0.626)",
                           }}
                         >
                           QUICK REPLIES
@@ -1144,20 +1181,30 @@ export default function Public({ userID }) {
                       return (
                         <div className={style.feedcard} key={x.id}>
                           <div className={style.feedData}>
+                            <span>March 8 2024</span>
                             <Rating
                               name="half-rating-read"
                               defaultValue={x.reting}
                               precision={0.5}
+                              style={{
+                                color:
+                                  x.reting === 1
+                                    ? "red"
+                                    : x.reting === 3
+                                    ? "yellow"
+                                    : "darkgreen",
+                              }}
                               readOnly
                             />
+
+                            <p>{x.description}</p>
                             <div className={style.batchFiled}>
                               <div
-                              
                                 style={{
                                   background: "rgba(243, 238, 238, 0.486)",
                                   color: "grey",
                                   padding: "4px 7px",
-                                  fontSize:"10px",
+                                  fontSize: "10px",
                                 }}
                               >
                                 FAST SHIPPER
@@ -1167,14 +1214,16 @@ export default function Public({ userID }) {
                                   background: "rgba(243, 238, 238, 0.709)",
                                   color: "grey",
                                   padding: "4px 7px",
-                                  fontSize:"10px",
+                                  fontSize: "10px",
                                 }}
                               >
                                 {x.bacth}
                               </div>
                             </div>
 
-                            <p>{x.description}</p>
+                            <Link href="" style={{ color: "black" }}>
+                              {"BARBOUR × STREETWEAR × VINTAGE"}
+                            </Link>
                             <p> {x.productName} </p>
                           </div>
                           <div>

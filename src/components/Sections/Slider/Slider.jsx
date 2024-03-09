@@ -21,17 +21,21 @@ export default function Slider() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/products");
-      setProducts(response.data.products.slice(0, 6)); // Slice to get only 6 products
+      const response = await axios.get('http://localhost:3001/api/products');
+      // Filter products where userName is "STAFPRODUCTS"
+      const filteredProducts = response.data.products.filter(product => product.userName === 'STAFPRODUCTS');
+      setProducts(filteredProducts);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error('Error fetching products:', error);
     }
   };
+
   const calculateDiscountPercentage = (price, floorPrice) => {
     return ((price - floorPrice) / price) * 100;
   }
   return (
-    <div className={style.wrapper}>
+    <div className={style.SliderCol}>
+      <div className={style.wrapper}>
     <div className={style.flex}><h2>Staff Picks</h2> <Link href='/products/staf'>SEE ALL</Link></div>
       <Swiper
         slidesPerView={1}
@@ -52,11 +56,11 @@ export default function Slider() {
           },
           "@1.00": {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
           "@1.50": {
             slidesPerView: 4,
-            spaceBetween:10,
+            spaceBetween:40,
           },
         }}
         className={style.swiper}
@@ -73,7 +77,7 @@ export default function Slider() {
                     <img src={product.productImage1} alt="" />
                     {!product.vendor?"":<span className={style.tags}>{product.vendor}</span>}
                   </div>
-                  <p>1 hour 14 munites ago</p>
+                  <p> about 1 hour <span style={{textDecoration:"line-through"}}>{'(23 days)'}</span></p>
                   <hr />
                   <div className={style.descCol}>
              
@@ -120,6 +124,7 @@ export default function Slider() {
           </SwiperSlide>
         ))}
       </Swiper>
+    </div>
     </div>
   );
 }
